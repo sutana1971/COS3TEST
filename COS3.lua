@@ -135,3 +135,5 @@ local function StartPlay()
 
 
 end
+wait(5)
+StartPlay()
