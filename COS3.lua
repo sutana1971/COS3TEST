@@ -67,7 +67,7 @@ local function StartPlay()
     wait(5)
     -- เวลาเข้าเกมครั้งแรก
     local args = {
-       [1] = "dif_insane"
+       [1] = "dif_hard"
     }
     Remote.PlaceDifficultyVote:InvokeServer(unpack(args))
     local AutoskipButton = game:GetService("Players").LocalPlayer.PlayerGui.GameGuiNoInset.Screen.Top.WaveControls.AutoSkip
