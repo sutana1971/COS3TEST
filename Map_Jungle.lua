@@ -22,13 +22,13 @@ end
 
 local function PlaceUnit(x,y,z)
     local args = {
-        [1] = "unit_tomato_plant",
+        [1] = "unit_farmer_npc",
         [2] = {
             ["Valid"] = true,
-            ["Position"] = Vector3.new(-308.77685546875+x, 61.68030548095703+y, -140.5894317626953+z),
-            ["CF"] = CFrame.new(-308.77685546875+x, 61.68030548095703+y, -140.5894317626953+z) * CFrame.Angles(-3.1415927410125732, -8.742277657347586e-08, -3.1415927410125732),
+            ["Position"] = Vector3.new(-338.291015625+x, 61.68030548095703+y, -85.99600219726562+z),
+            ["CF"] = CFrame.new(-338.291015625+x, 61.68030548095703+y, -85.99600219726562+z, -1, 0, -8.742277657347586e-08, 0, 1, 0, 8.742277657347586e-08, 0, -1),
             ["Rotation"] = 180}}
-    Remote.PlaceUnit:InvokeServer(unpack(args))
+        Remote.PlaceUnit:InvokeServer(unpack(args))
 end
 
 local function UpgradeUnit(ID)
@@ -67,7 +67,7 @@ local function StartPlay()
     wait(5)
     -- เวลาเข้าเกมครั้งแรก
     local args = {
-       [1] = "dif_hard"
+       [1] = "dif_insane"
     }
     Remote.PlaceDifficultyVote:InvokeServer(unpack(args))
     local AutoskipButton = game:GetService("Players").LocalPlayer.PlayerGui.GameGuiNoInset.Screen.Top.WaveControls.AutoSkip
@@ -89,7 +89,7 @@ local function StartPlay()
         if RestartButton.Visible == true then
             game:GetService("ReplicatedStorage").RemoteFunctions.RestartGame:InvokeServer() end
         wait(1.5)
-        local args = {[1] = "dif_hard"}
+        local args = {[1] = "dif_insane"}
         Remote.PlaceDifficultyVote:InvokeServer(unpack(args))
         Restarted = true
     end)
@@ -108,27 +108,18 @@ local function StartPlay()
             Restarted = false
         end
         --วางตัว
-        if Cash >= 100 and UnitPlaced < 10 then
+        if Cash >= 250 and UnitPlaced < 10 then
             PlaceUnit(x,y,z)
-            z = z-3.2
+            z = z-3
             UnitPlaced = UnitPlaced+1 
-        elseif Cash >= 100 and UnitPlaced < 20 then
+        elseif Cash >= 250 and UnitPlaced < 20 then
             if UnitPlaced == 10 then
-                x = x-3.3
-                z = z+3.2
+                x = x-7
+                z = z+3
             end
             PlaceUnit(x,y,z)
-            z = z+3.2
+            z = z+3
             UnitPlaced = UnitPlaced+1 
-        end
-        -- อัพเกรด
-        if UnitPlaced == 20 then
-            for _, v in ipairs(Entities:GetChildren()) do
-                if v.Name == "unit_tomato_plant" then
-                    wait(0.3)
-                    UpgradeUnit(v:GetAttribute("ID"))
-                end
-            end
         end
 
     end
