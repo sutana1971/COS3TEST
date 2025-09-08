@@ -89,7 +89,7 @@ local function StartPlay()
         if RestartButton.Visible == true then
             game:GetService("ReplicatedStorage").RemoteFunctions.RestartGame:InvokeServer() end
         wait(1.5)
-        local args = {[1] = "dif_insane"}
+        local args = {[1] = "dif_hard"}
         Remote.PlaceDifficultyVote:InvokeServer(unpack(args))
         Restarted = true
     end)
